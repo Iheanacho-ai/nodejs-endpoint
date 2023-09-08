@@ -24,7 +24,7 @@ app.get('/api/info', (req, res) => {
   }
 
   // Get GitHub URL of the file being run
-  const fileURL = 'https://github.com/your-username/your-repo/blob/main/your-file.js';
+  const fileURL = 'https://github.com/Iheanacho-ai/nodejs-endpoint/blob/main/app.js';
 
   // Get GitHub URL of the full source code
   const sourceCodeURL = 'https://github.com/Iheanacho-ai/nodejs-endpoint';
