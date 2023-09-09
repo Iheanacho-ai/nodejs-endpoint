@@ -14,21 +14,22 @@ app.get('/api', (req, res) => {
 
   // Get current day of the week
   const now = new Date();
-  const current_day = now.toLocaleDateString('en-US', { weekday: 'long' });
+  const options = { weekday: 'long', timeZone: 'UTC' };
+  const current_day  = now.toLocaleString('en-US', options);
 
    // Get current UTC time as a string 
-   const utc_time = now.toISOString();
+   const utc_time = new Date().toISOString().slice(0, 19) + 'Z';
 
    // Validate UTC time (+/-2) 
    const currentTimeUTC = moment.utc(utc_time);
-   const isValidUTC = currentTimeUTC.isBetween(
-    moment().subtract(2, 'hours'),
-    moment().add(2, 'hours')
-   );
- 
-   if (!isValidUTC) {
-    return res.status(400).json({ error: 'UTC time is not within +/-2 hours.' });
-   }
+    const isValidUTC = currentTimeUTC.isBetween(
+        moment().subtract(2, 'hours'),
+        moment().add(2, 'hours')
+    );
+
+    if (!isValidUTC) {
+        return res.status(400).json({ error: 'UTC time is not within +/-2 hours.' });
+    }
 
   // Get GitHub URL of the file being run
   const github_file_url = 'https://github.com/Iheanacho-ai/nodejs-endpoint/blob/main/app.js';
