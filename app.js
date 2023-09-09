@@ -4,7 +4,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Define your API endpoint
-app.get('/api/info', (req, res) => {
+app.get('/api', (req, res) => {
   const { slackName, track } = req.query;
 
   // Validate slackName and track query parameters
