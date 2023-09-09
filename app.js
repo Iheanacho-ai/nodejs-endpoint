@@ -13,10 +13,10 @@ app.get('/api', (req, res) => {
   }
 
   // Get current day of the week
-  const current_day = moment().tz('UTC').format('dddd');
+  const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' });
 
   // Get current UTC time with validation of +/-2
-  const currentTimeUTC = moment().tz('UTC');
+  const currentTimeUTC = now.toISOString();
   const isValidUTC = currentTimeUTC.isBetween(moment().subtract(2, 'hours'), moment().add(2, 'hours'));
 
   if (!isValidUTC) {
