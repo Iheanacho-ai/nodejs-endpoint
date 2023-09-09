@@ -5,10 +5,10 @@ const port = process.env.PORT || 3000;
 
 // Define your API endpoint
 app.get('/api', (req, res) => {
-  const { slackName, track } = req.query;
+  const { slack_name, track } = req.query;
 
-  // Validate slackName and track query parameters
-  if (!slackName || !track) {
+  // Validate slack_name and track query parameters
+  if (!slack_name || !track) {
     return res.status(400).json({ error: 'Missing required query parameters.' });
   }
 
@@ -31,7 +31,7 @@ app.get('/api', (req, res) => {
 
   // Return the information in JSON format
   res.status(200).json({
-    slackName,
+    slack_name,
     currentDayOfWeek,
     currentTimeUTC: currentTimeUTC.format('HH:mm:ss'),
     track,
