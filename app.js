@@ -13,7 +13,7 @@ app.get('/api', (req, res) => {
   }
 
   // Get current day of the week
-  const currentDayOfWeek = moment().tz('UTC').format('dddd');
+  const current_day = moment().tz('UTC').format('dddd');
 
   // Get current UTC time with validation of +/-2
   const currentTimeUTC = moment().tz('UTC');
@@ -24,20 +24,20 @@ app.get('/api', (req, res) => {
   }
 
   // Get GitHub URL of the file being run
-  const fileURL = 'https://github.com/Iheanacho-ai/nodejs-endpoint/blob/main/app.js';
+  const github_file_url = 'https://github.com/Iheanacho-ai/nodejs-endpoint/blob/main/app.js';
 
   // Get GitHub URL of the full source code
-  const sourceCodeURL = 'https://github.com/Iheanacho-ai/nodejs-endpoint';
+  const github_repo_url = 'https://github.com/Iheanacho-ai/nodejs-endpoint';
 
   // Return the information in JSON format
   res.status(200).json({
     slack_name,
-    currentDayOfWeek,
-    currentTimeUTC: currentTimeUTC.format('HH:mm:ss'),
+    current_day,
+    utc_time: currentTimeUTC.format('HH:mm:ss'),
     track,
-    fileURL,
-    sourceCodeURL,
-    statusCode: 'Success',
+    github_file_url,
+    github_repo_url,
+    status_code: 'Success',
   });
 });
 
