@@ -13,15 +13,22 @@ app.get('/api', (req, res) => {
   }
 
   // Get current day of the week
-  const currentDay = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+  const now = new Date();
+  const current_day = now.toLocaleDateString('en-US', { weekday: 'long' });
 
-  // Get current UTC time with validation of +/-2
-  const currentTimeUTC = now.toISOString();
-  const isValidUTC = currentTimeUTC.isBetween(moment().subtract(2, 'hours'), moment().add(2, 'hours'));
+   // Get current UTC time as a string 
+   const utc_time = now.toISOString();
 
-  if (!isValidUTC) {
+   // Validate UTC time (+/-2) 
+   const currentTimeUTC = moment.utc(utc_time);
+   const isValidUTC = currentTimeUTC.isBetween(
+    moment().subtract(2, 'hours'),
+    moment().add(2, 'hours')
+   );
+ 
+   if (!isValidUTC) {
     return res.status(400).json({ error: 'UTC time is not within +/-2 hours.' });
-  }
+   }
 
   // Get GitHub URL of the file being run
   const github_file_url = 'https://github.com/Iheanacho-ai/nodejs-endpoint/blob/main/app.js';
@@ -33,7 +40,7 @@ app.get('/api', (req, res) => {
   res.status(200).json({
     slack_name,
     current_day,
-    utc_time: currentTimeUTC.format('HH:mm:ss'),
+    utc_time,
     track,
     github_file_url,
     github_repo_url,
